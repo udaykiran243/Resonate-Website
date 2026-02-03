@@ -21,7 +21,7 @@ export function Navbar() {
     // Handle scroll detection and progress
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
+
       // Calculate scroll progress
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
@@ -34,7 +34,7 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     // Call once on mount to set initial state
     handleScroll();
-    
+
     return () => {
       clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
@@ -46,13 +46,12 @@ export function Navbar() {
   return (
     <header className="fixed top-4 lg:top-0 left-0 right-0 z-50 mx-4 sm:mx-8 lg:mx-16 xl:mx-48 border-[0.6px] border-default rounded-2xl  lg:rounded-b-3xl lg:rounded-t-none backdrop-blur-md bg-(--nav-background) transition-colors duration-300">
       <div className="mx-auto flex py-3 sm:py-4 items-center justify-between px-4 sm:px-6 lg:px-9">
-        
         {/* LEFT: Logo */}
         <Link
           href="#"
           onClick={(e) => {
             e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
           className="flex items-center gap-3 transition-opacity hover:opacity-80 cursor-pointer"
         >
@@ -74,7 +73,9 @@ export function Navbar() {
         {/* CENTER: Desktop Navigation */}
         <nav
           className={`hidden lg:flex items-center border rounded-full border-default py-1 bg-surface transition-all duration-1000 ease-in-out ${
-            hasAnimatedIn ? "translate-y-0 opacity-100" : "-translate-y-[50px] opacity-0"
+            hasAnimatedIn
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-[50px] opacity-0"
           } ${
             shouldShowNavContent ? "gap-4 xl:gap-8 px-3 xl:px-4" : "gap-18 px-3"
           }`}
@@ -90,12 +91,20 @@ export function Navbar() {
           />
           <div
             className={`flex items-center gap-4 xl:gap-8 transition-all duration-500 ${
-              shouldShowNavContent ? "opacity-100 max-w-[500px]" : "opacity-0 max-w-0 overflow-hidden"
+              shouldShowNavContent
+                ? "opacity-100 max-w-[500px]"
+                : "opacity-0 max-w-0 overflow-hidden"
             }`}
           >
-            <NavLink href="https://github.com/AOSSIE-Org" external>Developers</NavLink>
-            <NavLink href="https://discord.gg/hjUhu33uAn" external>Community</NavLink>
-            <NavLink href="https://aossie.org" external>Aossie</NavLink>
+            <NavLink href="https://github.com/AOSSIE-Org" external>
+              Developers
+            </NavLink>
+            <NavLink href="https://discord.gg/hjUhu33uAn" external>
+              Community
+            </NavLink>
+            <NavLink href="https://aossie.org" external>
+              Aossie
+            </NavLink>
             <ThemeToggle />
           </div>
           <div className="relative h-6 w-6">
@@ -141,6 +150,7 @@ export function Navbar() {
           <Link
             href="https://play.google.com/store/apps/details?id=com.resonate.resonate"
             target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex h-9 xl:h-10 items-center justify-center rounded-full px-4 xl:px-6 text-sm xl:text-md font-semibold transition-all hover:scale-105 active:scale-95 bg-(--button-primary-bg) text-(--button-primary-text) border-(--button-primary-border) border-[1.5px] hover:bg-(--button-primary-hover-bg) hover:border-(--button-primary-hover-border)"
           >
             Download Now
@@ -180,34 +190,36 @@ export function Navbar() {
         <div className="lg:hidden border-t border-default bg-(--background-secondary) px-4 sm:px-6 py-4 shadow-xl animate-in slide-in-from-top-5 rounded-b-3xl">
           <nav className="flex flex-col gap-3 sm:gap-4">
             <MobileNavLink
-              href="#features"
+              href="https://github.com/AOSSIE-Org"
+              external
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Developers
             </MobileNavLink>
             <MobileNavLink
-              href="#community"
+              href="https://discord.gg/hjUhu33uAn"
+              external
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Community
             </MobileNavLink>
             <MobileNavLink
               href="https://aossie.org"
+              external
               onClick={() => setIsMobileMenuOpen(false)}
             >
               AOSSIE
             </MobileNavLink>
 
-            <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-default mt-2">
-              <span className="text-sm font-medium text-muted">
-                Switch Theme
-              </span>
-              <ThemeToggle />
+            {/* UPDATED: Make entire row clickable */}
+            <div className="pt-3 sm:pt-4 border-t border-default mt-2">
+              <ThemeToggle isMobile />
             </div>
 
             <Link
               href="https://play.google.com/store/apps/details?id=com.resonate.resonate"
               target="_blank"
+              rel="noopener noreferrer"
               className="mt-2 flex h-10 sm:h-11 w-full items-center justify-center rounded-full text-sm font-bold transition-all bg-(--button-primary-bg) text-(--button-primary-text) border-(--button-primary-border) border-[1.5px] hover:bg-(--button-primary-hover-bg) active:scale-95"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -234,6 +246,7 @@ function NavLink({
     <Link
       href={href}
       target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       className="text-sm font-medium text-muted hover:text-primary transition-colors whitespace-nowrap"
     >
       {children}
@@ -245,15 +258,19 @@ function MobileNavLink({
   href,
   children,
   onClick,
+  external,
 }: {
   href: string;
   children: React.ReactNode;
   onClick: () => void;
+  external?: boolean;
 }) {
   return (
     <Link
       href={href}
       onClick={onClick}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       className="text-base font-medium text-primary py-2 block hover:text-secondary transition-colors"
     >
       {children}

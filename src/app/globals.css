@@ -17,7 +17,7 @@
   --nav-background: rgba(245, 245, 245, 0.8); /* Added for glassmorphism */
   
   /* Text Colors */
-  --foreground: linear-gradient(0deg, #1C1C1C 0%, #000 100%);
+  --foreground: #1C1C1C;
   --foreground-secondary: #121212;
   --foreground-muted: #4D4D4D;
 
@@ -35,6 +35,7 @@
   --button-primary-border: #121212;
   --button-primary-hover-bg: var(--color-neutral-50);
   --button-primary-hover-border: #121212;
+  --button-subtle-bg: #9797971e;
 }
 
 /* DARK MODE */
@@ -44,7 +45,7 @@
   --nav-background: rgba(16, 16, 16, 0.8); /* Added for glassmorphism */
   
   /* Text Colors */
-  --foreground: linear-gradient(0deg, #D3D3D3 0%, #FFF 100%);
+  --foreground: #D3D3D3;
   --foreground-secondary: #B4B4B4;
   --foreground-muted: #7F8188;
 
@@ -62,6 +63,7 @@
   --button-primary-border: transparent;
   --button-primary-hover-bg: var(--color-neutral-100);
   --button-primary-hover-border: var(--color-neutral-100);
+  --button-subtle-bg: #bbbbbb0e;
 }
 
 /* --- GLOBAL STYLES --- */
